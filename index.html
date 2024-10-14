@@ -1,0 +1,133 @@
+<!doctype html>
+<html lang="en">
+
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Bootstrap demo</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet"
+        integrity="sha384-QWTKZyjpPEjISv5WaRU9OFeRpok6YctnYmDr5pNlyT2bRjXh0JMhjY6hW+ALEwIH" crossorigin="anonymous">
+</head>
+
+<body>
+    <div class="container mt-4">
+        <h1>Formularz firmowy</h1>
+        <form id="companyForm">
+            <div class="mb-3">
+                <label for="exampleInputName" class="form-label">Nazwa firmy</label>
+                <input type="text" class="form-control" id="exampleInputName" required>
+            </div>
+
+            <div class="mb-3">
+                <label for="nip" class="form-label">NIP</label>
+                <input type="text" class="form-control" id="nip" required>
+            </div>
+
+            <div class="mb-3">
+                <label for="miasto" class="form-label">Miasto</label>
+                <input type="text" class="form-control" id="miasto" required>
+            </div>
+
+            <div class="mb-3">
+                <label for="ulica" class="form-label">Ulica</label>
+                <input type="text" class="form-control" id="ulica" required>
+            </div>
+
+            <div class="mb-3">
+                <label for="numerDomu" class="form-label">Numer domu</label>
+                <input type="text" class="form-control" id="numerDomu" required>
+            </div>
+
+            <div class="mb-3">
+                <label for="numerMieszkania" class="form-label">Numer mieszkania</label>
+                <input type="text" class="form-control" id="numerMieszkania">
+            </div>
+
+            <div class="mb-3">
+                <label for="kodPocztowy" class="form-label">Kod pocztowy</label>
+                <input type="text" class="form-control" id="kodPocztowy" required>
+            </div>
+
+            <div class="mb-3">
+                <label for="branza" class="form-label">Branża</label>
+                <select class="form-select" id="branza" required>
+                    <option value="" disabled selected>Wybierz branżę</option>
+                    <option value="IT">IT</option>
+                    <option value="Finanse">Finanse</option>
+                    <option value="Budownictwo">Budownictwo</option>
+                    <option value="Marketing">Marketing</option>
+                    <option value="Edukacja">Edukacja</option>
+                </select>
+            </div>
+
+            <div class="mb-3">
+                <label for="uwagi" class="form-label">Uwagi</label>
+                <textarea class="form-control" id="uwagi" rows="3"></textarea>
+            </div>
+
+            <div class="mb-3 form-check">
+                <input type="checkbox" class="form-check-input" id="aktywny">
+                <label class="form-check-label" for="aktywny">Aktywny</label>
+            </div>
+
+            <button type="button" class="btn btn-secondary" id="zapiszBtn">Zapisz</button>
+            <button type="button" class="btn btn-primary" id="wstawDaneBtn">Wstaw dane</button>
+        </form>
+    </div>
+
+    <script>
+        document.addEventListener('DOMContentLoaded', function () {
+            // Funkcja do ustawienia przykładowych danych
+            function setSampleData() {
+                document.getElementById('exampleInputName').value = "Przykład Sp. z o.o.";
+                document.getElementById('nip').value = "35235235245";
+                document.getElementById('miasto').value = "Kraków";
+                document.getElementById('ulica').value = "lalala";
+                document.getElementById('numerDomu').value = "20";
+                document.getElementById('numerMieszkania').value = "45";
+                document.getElementById('kodPocztowy').value = "31-425";
+                document.getElementById('branza').value = "IT";
+                document.getElementById('uwagi').value = "Brak uwag";
+                document.getElementById('aktywny').checked = true;
+            }
+
+            // Funkcja do blokowania pól formularza
+            function disableForm() {
+                const inputs = document.querySelectorAll('#companyForm input, #companyForm select, #companyForm textarea');
+                inputs.forEach(input => {
+                    input.disabled = true;
+                });
+            }
+
+            // Funkcja do zapisywania danych
+            document.getElementById('zapiszBtn').addEventListener('click', function () {
+                const formData = {
+                    nazwaFirmy: document.getElementById('exampleInputName').value,
+                    nip: document.getElementById('nip').value,
+                    miasto: document.getElementById('miasto').value,
+                    ulica: document.getElementById('ulica').value,
+                    numerDomu: document.getElementById('numerDomu').value,
+                    numerMieszkania: document.getElementById('numerMieszkania').value,
+                    kodPocztowy: document.getElementById('kodPocztowy').value,
+                    branza: document.getElementById('branza').value,
+                    uwagi: document.getElementById('uwagi').value,
+                    aktywny: document.getElementById('aktywny').checked,
+                };
+                console.log(formData);
+                disableForm();  // Zablokowanie pól po zapisaniu
+            });
+
+            // Funkcja do wstawiania danych do formularza
+            document.getElementById('wstawDaneBtn').addEventListener('click', function () {
+                setSampleData();
+                disableForm();  // Zablokowanie pól po wstawieniu danych
+            });
+        });
+    </script>
+
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"
+        integrity="sha384-YvpcrYf0tY3lHB60NNkmXc5s9fDVZLESaAA55NDzOxhy9GkcIdslK1eN7N6jIeHz"
+        crossorigin="anonymous"></script>
+</body>
+
+</html>

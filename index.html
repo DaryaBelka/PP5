@@ -1,107 +1,163 @@
 <!doctype html>
-<html lang="en">
-
+<html lang="pl">
 <head>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
-    <title>Bootstrap demo</title>
+    <title>Klienci</title>
     <link rel="stylesheet" href="assets/style/style.css">
 </head>
 
 <body>
     <div class="container mt-4">
-        <h1>Formularz firmowy</h1>
-        <form id="companyForm">
-            <div class="mb-3">
-                <label for="exampleInputName" class="form-label">Nazwa firmy</label>
-                <input type="text" class="form-control" id="exampleInputName" required>
-            </div>
+        <h1>Lista klientów</h1>
+        <div class="buttons">
+            <button id="showFormBtn" class="btn btn-primary">Dodaj Klienta</button>
+            <button id="showListBtn" class="btn btn-secondary">Lista Klientów</button>
+        </div>
 
-            <div class="mb-3">
-                <label for="nip" class="form-label">NIP</label>
-                <input type="text" class="form-control" id="nip" required>
-            </div>
+        <!-- Sekcja formularza dodawania klienta -->
+        <div id="formSection" style="display: block;">
+            <h2>Formularz Firmowy</h2>
+            <form id="companyForm">
+                <div class="mb-3">
+                    <label for="exampleInputName" class="form-label">Name</label>
+                    <input type="text" class="form-control" id="exampleInputName" required>
+                </div>
+                <div class="mb-3">
+                    <label for="nip" class="form-label">NIP</label>
+                    <input type="text" class="form-control" id="nip" required>
+                </div>
+                <div class="mb-3">
+                    <label for="miasto" class="form-label">Miasto</label>
+                    <input type="text" class="form-control" id="miasto" required>
+                </div>
+                <div class="mb-3">
+                    <label for="ulica" class="form-label">Ulica</label>
+                    <input type="text" class="form-control" id="ulica" required>
+                </div>
+                <div class="mb-3">
+                    <label for="numerDomu" class="form-label">Numer domu</label>
+                    <input type="text" class="form-control" id="numerDomu" required>
+                </div>
+                <div class="mb-3">
+                    <label for="numerMieszkania" class="form-label">Numer mieszkania</label>
+                    <input type="text" class="form-control" id="numerMieszkania">
+                </div>
+                <div class="mb-3">
+                    <label for="kodPocztowy" class="form-label">Kod pocztowy</label>
+                    <input type="text" class="form-control" id="kodPocztowy" required>
+                </div>
+                <div class="mb-3">
+                    <label for="branza" class="form-label">Branża</label>
+                    <select class="form-select" id="branza" required>
+                        <option value="" disabled selected>Wybierz branżę</option>
+                        <option value="IT">IT</option>
+                        <option value="Finanse">Finanse</option>
+                        <option value="Budownictwo">Budownictwo</option>
+                        <option value="Marketing">Marketing</option>
+                        <option value="Edukacja">Edukacja</option>
+                    </select>
+                </div>
+                <div class="mb-3">
+                    <label for="uwagi" class="form-label">Uwagi</label>
+                    <textarea class="form-control" id="uwagi" rows="3"></textarea>
+                </div>
+                <div class="mb-3 form-check">
+                    <input type="checkbox" class="form-check-input" id="aktywny">
+                    <label class="form-check-label" for="aktywny">Aktywny</label>
+                </div>
+                <button type="button" class="btn btn-success" id="zapiszBtn">Zapisz</button>
+                <button type="button" class="btn btn-primary" id="wstawBtn">Wstaw dane</button>
+            </form>
+        </div>
 
-            <div class="mb-3">
-                <label for="miasto" class="form-label">Miasto</label>
-                <input type="text" class="form-control" id="miasto" required>
-            </div>
-
-            <div class="mb-3">
-                <label for="ulica" class="form-label">Ulica</label>
-                <input type="text" class="form-control" id="ulica" required>
-            </div>
-
-            <div class="mb-3">
-                <label for="numerDomu" class="form-label">Numer domu</label>
-                <input type="text" class="form-control" id="numerDomu" required>
-            </div>
-
-            <div class="mb-3">
-                <label for="numerMieszkania" class="form-label">Numer mieszkania</label>
-                <input type="text" class="form-control" id="numerMieszkania">
-            </div>
-
-            <div class="mb-3">
-                <label for="kodPocztowy" class="form-label">Kod pocztowy</label>
-                <input type="text" class="form-control" id="kodPocztowy" required>
-            </div>
-
-            <div class="mb-3">
-                <label for="branza" class="form-label">Branża</label>
-                <select class="form-select" id="branza" required>
-                    <option value="" disabled selected>Wybierz branżę</option>
-                    <option value="IT">IT</option>
-                    <option value="Finanse">Finanse</option>
-                    <option value="Budownictwo">Budownictwo</option>
-                    <option value="Marketing">Marketing</option>
-                    <option value="Edukacja">Edukacja</option>
-                </select>
-            </div>
-
-            <div class="mb-3">
-                <label for="uwagi" class="form-label">Uwagi</label>
-                <textarea class="form-control" id="uwagi" rows="3"></textarea>
-            </div>
-
-            <div class="mb-3 form-check">
-                <input type="checkbox" class="form-check-input" id="aktywny">
-                <label class="form-check-label" for="aktywny">Aktywny</label>
-            </div>
-
-            <button type="button" class="btn btn-secondary" id="zapiszBtn">Zapisz</button>
-            <button type="button" class="btn btn-primary" id="wstawDaneBtn">Wstaw dane</button>
-        </form>
+        <!-- Sekcja listy klientów -->
+        <div id="listSection" style="display: none;">
+            <h2>Lista Klientów</h2>
+            <ul id="clientList" class="list-group"></ul>
+        </div>
     </div>
 
     <script>
         document.addEventListener('DOMContentLoaded', function () {
-            // Funkcja do ustawienia przykładowych danych
-            function setSampleData() {
-                document.getElementById('exampleInputName').value = "Przykład Sp. z o.o.";
-                document.getElementById('nip').value = "35235235245";
-                document.getElementById('miasto').value = "Kraków";
-                document.getElementById('ulica').value = "lalala";
-                document.getElementById('numerDomu').value = "20";
-                document.getElementById('numerMieszkania').value = "45";
-                document.getElementById('kodPocztowy').value = "31-425";
-                document.getElementById('branza').value = "IT";
-                document.getElementById('uwagi').value = "Brak uwag";
-                document.getElementById('aktywny').checked = true;
+            const formSection = document.getElementById('formSection');
+            const listSection = document.getElementById('listSection');
+            const showFormBtn = document.getElementById('showFormBtn');
+            const showListBtn = document.getElementById('showListBtn');
+            const clientList = document.getElementById('clientList');
+            const saveButton = document.getElementById('zapiszBtn');
+            const wstawBtn = document.getElementById('wstawBtn');
+
+            const clients = [];
+
+            // Функция для автоматического заполнения полей начальными значениями
+            function setDefaultValues() {
+                document.getElementById("exampleInputName").value = "Jan Nowak";
+                document.getElementById("nip").value = "1111111111";
+                document.getElementById("miasto").value = "Krakow";
+                document.getElementById("ulica").value = "Lalala";
+                document.getElementById("numerDomu").value = "22";
+                document.getElementById("kodPocztowy").value = "33-245";
+                document.getElementById("uwagi").value = "brak";
+                document.getElementById("branza").value = "IT";
+                document.getElementById("aktywny").checked = true;
             }
 
-            // Funkcja do blokowania pól formularza
-            function disableForm() {
-                const inputs = document.querySelectorAll('#companyForm input, #companyForm select, #companyForm textarea');
-                inputs.forEach(input => {
-                    input.disabled = true;
+            // Функция блокировки полей формы
+            function blockFields() {
+                const fields = [
+                    "exampleInputName", "nip", "miasto", "ulica", "numerDomu",
+                    "numerMieszkania", "kodPocztowy", "branza", "uwagi", "aktywny"
+                ];
+                fields.forEach(id => {
+                    const field = document.getElementById(id);
+                    field.disabled = true; // Блокируем поле
                 });
             }
 
-            // Funkcja do zapisywania danych
-            document.getElementById('zapiszBtn').addEventListener('click', function () {
-                const formData = {
-                    nazwaFirmy: document.getElementById('exampleInputName').value,
+            // Переключение между формой и списком
+            function showSection(section) {
+                formSection.style.display = section === 'form' ? 'block' : 'none';
+                listSection.style.display = section === 'list' ? 'block' : 'none';
+            }
+
+            // Заполнение полей начальными значениями при открытии формы
+            showFormBtn.addEventListener('click', () => {
+                showSection('form');
+                setDefaultValues();
+            });
+            
+            showListBtn.addEventListener('click', () => {
+                renderClientList();
+                showSection('list');
+            });
+
+            // Обработка кнопки "Wstaw dane" для блокировки полей
+            wstawBtn.addEventListener('click', (event) => {
+                event.preventDefault();
+                blockFields(); // Блокировка полей при нажатии на кнопку "Wstaw dane"
+            });
+
+            // Добавление клиента в список
+            function addClient(clientData) {
+                clients.push(clientData);
+            }
+
+            // Отображение списка клиентов
+            function renderClientList() {
+                clientList.innerHTML = '';
+                clients.forEach(client => {
+                    const clientItem = document.createElement('li');
+                    clientItem.classList.add('list-group-item');
+                    clientItem.textContent = client.name;
+                    clientList.appendChild(clientItem);
+                });
+            }
+
+            // Сохранение клиента и добавление в список
+            saveButton.addEventListener('click', () => {
+                const clientData = {
+                    name: document.getElementById('exampleInputName').value,
                     nip: document.getElementById('nip').value,
                     miasto: document.getElementById('miasto').value,
                     ulica: document.getElementById('ulica').value,
@@ -110,23 +166,17 @@
                     kodPocztowy: document.getElementById('kodPocztowy').value,
                     branza: document.getElementById('branza').value,
                     uwagi: document.getElementById('uwagi').value,
-                    aktywny: document.getElementById('aktywny').checked,
+                    aktywny: document.getElementById('aktywny').checked
                 };
-                console.log(formData);
-                disableForm();  // Zablokowanie pól po zapisaniu
+
+                addClient(clientData);
+                document.getElementById('companyForm').reset(); // Очищаем форму
+                showSection('list');
             });
 
-            // Funkcja do wstawiania danych do formularza
-            document.getElementById('wstawDaneBtn').addEventListener('click', function () {
-                setSampleData();
-                disableForm();  // Zablokowanie pól po wstawieniu danych
-            });
+            // Устанавливаем начальные значения при загрузке страницы
+            setDefaultValues();
         });
     </script>
-
-    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"
-        integrity="sha384-YvpcrYf0tY3lHB60NNkmXc5s9fDVZLESaAA55NDzOxhy9GkcIdslK1eN7N6jIeHz"
-        crossorigin="anonymous"></script>
 </body>
-
 </html>

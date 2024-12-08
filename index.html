@@ -1,182 +1,104 @@
 <!doctype html>
-<html lang="pl">
-<head>
+<html lang="en">
+  <head>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
-    <title>Klienci</title>
-    <link rel="stylesheet" href="assets/style/style.css">
-</head>
-
-<body>
-    <div class="container mt-4">
-        <h1>Lista klientów</h1>
-        <div class="buttons">
-            <button id="showFormBtn" class="btn btn-primary">Dodaj Klienta</button>
-            <button id="showListBtn" class="btn btn-secondary">Lista Klientów</button>
-        </div>
-
-        <!-- Sekcja formularza dodawania klienta -->
-        <div id="formSection" style="display: block;">
-            <h2>Formularz Firmowy</h2>
-            <form id="companyForm">
-                <div class="mb-3">
-                    <label for="exampleInputName" class="form-label">Name</label>
-                    <input type="text" class="form-control" id="exampleInputName" required>
-                </div>
-                <div class="mb-3">
-                    <label for="nip" class="form-label">NIP</label>
-                    <input type="text" class="form-control" id="nip" required>
-                </div>
-                <div class="mb-3">
-                    <label for="miasto" class="form-label">Miasto</label>
-                    <input type="text" class="form-control" id="miasto" required>
-                </div>
-                <div class="mb-3">
-                    <label for="ulica" class="form-label">Ulica</label>
-                    <input type="text" class="form-control" id="ulica" required>
-                </div>
-                <div class="mb-3">
-                    <label for="numerDomu" class="form-label">Numer domu</label>
-                    <input type="text" class="form-control" id="numerDomu" required>
-                </div>
-                <div class="mb-3">
-                    <label for="numerMieszkania" class="form-label">Numer mieszkania</label>
-                    <input type="text" class="form-control" id="numerMieszkania">
-                </div>
-                <div class="mb-3">
-                    <label for="kodPocztowy" class="form-label">Kod pocztowy</label>
-                    <input type="text" class="form-control" id="kodPocztowy" required>
-                </div>
-                <div class="mb-3">
-                    <label for="branza" class="form-label">Branża</label>
-                    <select class="form-select" id="branza" required>
-                        <option value="" disabled selected>Wybierz branżę</option>
-                        <option value="IT">IT</option>
-                        <option value="Finanse">Finanse</option>
-                        <option value="Budownictwo">Budownictwo</option>
-                        <option value="Marketing">Marketing</option>
-                        <option value="Edukacja">Edukacja</option>
-                    </select>
-                </div>
-                <div class="mb-3">
-                    <label for="uwagi" class="form-label">Uwagi</label>
-                    <textarea class="form-control" id="uwagi" rows="3"></textarea>
-                </div>
-                <div class="mb-3 form-check">
-                    <input type="checkbox" class="form-check-input" id="aktywny">
-                    <label class="form-check-label" for="aktywny">Aktywny</label>
-                </div>
-                <button type="button" class="btn btn-success" id="zapiszBtn">Zapisz</button>
-                <button type="button" class="btn btn-primary" id="wstawBtn">Wstaw dane</button>
-            </form>
-        </div>
-
-        <!-- Sekcja listy klientów -->
-        <div id="listSection" style="display: none;">
-            <h2>Lista Klientów</h2>
-            <ul id="clientList" class="list-group"></ul>
-        </div>
+    <title>Bootstrap demo</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-QWTKZyjpPEjISv5WaRU9OFeRpok6YctnYmDr5pNlyT2bRjXh0JMhjY6hW+ALEwIH" crossorigin="anonymous">
+    <link rel="stylesheet" href="style.css">
+  </head>
+  <body>
+    <div id="customer-list">
+      <ul id="customer-list-data" class="list-group">Lista klientów
+        
+      </ul>
+      
+      <button type="button" class="btn btn-outline-info" onclick="showForm();enableFormEl()" class="btn">Wyświetl formę</button>
+      
     </div>
+   
+    <div id="customer-form" style="display:none">
+    <h1 class="container text-center">Dane klienta</h1>
+    <form onsubmit="save(event)">
+      <input type="hidden" id="customerId">
 
-    <script>
-        document.addEventListener('DOMContentLoaded', function () {
-            const formSection = document.getElementById('formSection');
-            const listSection = document.getElementById('listSection');
-            const showFormBtn = document.getElementById('showFormBtn');
-            const showListBtn = document.getElementById('showListBtn');
-            const clientList = document.getElementById('clientList');
-            const saveButton = document.getElementById('zapiszBtn');
-            const wstawBtn = document.getElementById('wstawBtn');
+      
+        <div class="row mb-3">
+          <label for="inputName" class="col-sm-2 col-form-label">Nazwa firmy</label>
+          <div class="col-sm-10">
+          <input type="text"  id="inputName" class="form-control custom-field" required>
+        </div>
+        </div>
+        <div class="row mb-3">
+          <label for="nip" class="col-sm-2 col-form-label">NIP</label>
+          <div class="col-sm-10">
+          <input type="text" class="form-control" id="nip" required>
+        </div>
+        </div>
+        <div class="row mb-3">
+            <label for="inputCity" class="col-sm-2 col-form-label">Miasto</label>
+            <div class="col-sm-10">
+            <input type="text" class="form-control" id="inputCity" required>
+          </div>
+        </div>
+        <div class="row mb-3">
+            <label for="inputStreet" class="col-sm-2 col-form-label">Ulica</label>
+            <div class="col-sm-10">
+            <input type="text" class="form-control" id="inputStreet" required>
+            </div>
+        
+          </div>
+        <div class="row mb-3">
+            <label for="inputHouseNumber" class="col-sm-2 col-form-label">Numer domu</label>
+            <div class="col-sm-10">
+            <input type="text" class="form-control" id="inputHouseNumber" required>
+          </div>
+        </div>
+        <div class="row mb-3">
+            <label for="ApartNumber" class="col-sm-2 col-form-label">Numer mieszkania</label>
+            <div class="col-sm-10">
+            <input type="text" class="form-control" id="inputApartNumber">
+          </div>
+        </div>
+        <div class="row mb-3">
+            <label for="inputPostcode" class="col-sm-2 col-form-label">Kod pocztowy</label>
+            <div class="col-sm-10">
+            <input type="text" class="form-control" id="inputPostcode" required>
+            </div>
+        </div>
 
-            const clients = [];
 
-            // Функция для автоматического заполнения полей начальными значениями
-            function setDefaultValues() {
-                document.getElementById("exampleInputName").value = "Jan Nowak";
-                document.getElementById("nip").value = "1111111111";
-                document.getElementById("miasto").value = "Krakow";
-                document.getElementById("ulica").value = "Lalala";
-                document.getElementById("numerDomu").value = "22";
-                document.getElementById("kodPocztowy").value = "33-245";
-                document.getElementById("uwagi").value = "brak";
-                document.getElementById("branza").value = "IT";
-                document.getElementById("aktywny").checked = true;
-            }
+        <div class="row mb-3">
+          <label for="comments" class="col-sm-2 col-form-label">Uwagi</label>
+          <div class="col-sm-10">
+            <textarea class="form-control" id="comments"></textarea>
+          </div>
+      </div>
+        <div class="row mb-3">
+            <label for="field" class="col-sm-2 col-form-label">Branża</label>
+            <div class="col-sm-10">
+            <select class="form-control" name="field" id="field" required>
+              <option value="" disabled selected>Wybierz branżę</option>
+              <option value="IT">IT</option>
+              <option value="Finance">Finanse</option>
+              <option value="Marketing">Marketing</option>
+            </select>
+          </div>
+        </div>
+        <div class="mb-3">
+            <input type="checkbox" class="form-check-input" id="isActive" required>
+            <label for="isActive" class="form-check-label">Aktywny</label>
+        </div>
+        <button type="submit" class="btn btn-outline-info">Zapisz</button>
+        <button type="button" class="btn btn-secondary" onclick="addDataToForm(getCustomer()); disableFormEl()">Wstaw dane</button>
+        
+     
+      </form>
 
-            // Функция блокировки полей формы
-            function blockFields() {
-                const fields = [
-                    "exampleInputName", "nip", "miasto", "ulica", "numerDomu",
-                    "numerMieszkania", "kodPocztowy", "branza", "uwagi", "aktywny"
-                ];
-                fields.forEach(id => {
-                    const field = document.getElementById(id);
-                    field.disabled = true; // Блокируем поле
-                });
-            }
-
-            // Переключение между формой и списком
-            function showSection(section) {
-                formSection.style.display = section === 'form' ? 'block' : 'none';
-                listSection.style.display = section === 'list' ? 'block' : 'none';
-            }
-
-            // Заполнение полей начальными значениями при открытии формы
-            showFormBtn.addEventListener('click', () => {
-                showSection('form');
-                setDefaultValues();
-            });
-            
-            showListBtn.addEventListener('click', () => {
-                renderClientList();
-                showSection('list');
-            });
-
-            // Обработка кнопки "Wstaw dane" для блокировки полей
-            wstawBtn.addEventListener('click', (event) => {
-                event.preventDefault();
-                blockFields(); // Блокировка полей при нажатии на кнопку "Wstaw dane"
-            });
-
-            // Добавление клиента в список
-            function addClient(clientData) {
-                clients.push(clientData);
-            }
-
-            // Отображение списка клиентов
-            function renderClientList() {
-                clientList.innerHTML = '';
-                clients.forEach(client => {
-                    const clientItem = document.createElement('li');
-                    clientItem.classList.add('list-group-item');
-                    clientItem.textContent = client.name;
-                    clientList.appendChild(clientItem);
-                });
-            }
-
-            // Сохранение клиента и добавление в список
-            saveButton.addEventListener('click', () => {
-                const clientData = {
-                    name: document.getElementById('exampleInputName').value,
-                    nip: document.getElementById('nip').value,
-                    miasto: document.getElementById('miasto').value,
-                    ulica: document.getElementById('ulica').value,
-                    numerDomu: document.getElementById('numerDomu').value,
-                    numerMieszkania: document.getElementById('numerMieszkania').value,
-                    kodPocztowy: document.getElementById('kodPocztowy').value,
-                    branza: document.getElementById('branza').value,
-                    uwagi: document.getElementById('uwagi').value,
-                    aktywny: document.getElementById('aktywny').checked
-                };
-
-                addClient(clientData);
-                document.getElementById('companyForm').reset(); // Очищаем форму
-                showSection('list');
-            });
-
-            // Устанавливаем начальные значения при загрузке страницы
-            setDefaultValues();
-        });
-    </script>
-</body>
+    </div>
+    
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-YvpcrYf0tY3lHB60NNkmXc5s9fDVZLESaAA55NDzOxhy9GkcIdslK1eN7N6jIeHz" crossorigin="anonymous"></script>
+    <script src="assets/js/index.js"></script>
+    <script src="assets/js/customer.js"></script>
+  </body>
 </html>

@@ -1,1 +1,5 @@
-<p>customer-list-element works!</p>
+<li class="list-group-item"
+   [ngStyle]="{'color': !customer.isActive ? 'red' : ''}"
+>{{customer.getAdress()}}</li>
+
+<button class="btn btn-danger" (click)="deleteCustomer()">X</button>
